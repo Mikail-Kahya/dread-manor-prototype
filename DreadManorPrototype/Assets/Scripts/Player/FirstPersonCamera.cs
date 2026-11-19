@@ -1,12 +1,26 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+
+using InputDevice = FirstPersonController.InputDevice;
 
 public class FirstPersonCamera : MonoBehaviour
 {
+    [Serializable]
+    public struct CameraSpeed
+    {
+        public InputDevice device;
+        public Vector2 speed;
+    }
+
     #region DataAdjustable
     [SerializeField] private float PitchClamp = 90f;
-    [SerializeField] private Vector2 CameraSpeedMouse = Vector2.one;
-    [SerializeField] private Vector2 CameraSpeedController = new Vector2(180f, 180f);
+    [SerializeField]
+    private List<CameraSpeed> CameraSpeeds = new List<CameraSpeed>
+    {
+        new CameraSpeed { device = InputDevice.mouse, speed = new Vector2(0.1f, 0.1f) },
+        new CameraSpeed { device = InputDevice.gamepad, speed = new Vector2(180f, 180f) }
+    };
     #endregion
 
     [SerializeField] private FirstPersonController Controller;
@@ -27,8 +41,8 @@ public class FirstPersonCamera : MonoBehaviour
     {
         if (Controller != null)
         {
-            float deltaRot = Controller.IsUsingMouse ? 1f : Time.deltaTime;
-            Vector2 cameraSpeed = Controller.IsUsingMouse ? CameraSpeedMouse : CameraSpeedController;
+            float deltaRot = Controller.Device == InputDevice.mouse ? 1f : Time.deltaTime;
+            Vector2 cameraSpeed = CameraSpeeds.Find(speed => speed.device == Controller.Device).speed;
 
             Vector2 lookInput = Controller.LookInput;
             _pitch -= lookInput.y * cameraSpeed.x * deltaRot;
@@ -38,7 +52,8 @@ public class FirstPersonCamera : MonoBehaviour
             _yaw = _yaw % 360f;
         }
 
-        if (Camera != null) Camera.localRotation = Quaternion.Euler(_pitch, 0, 0);
+        if (Camera != null) 
+            Camera.localRotation = Quaternion.Euler(_pitch, 0, 0);
 
         transform.rotation = Quaternion.Euler(0, _yaw, 0);
     }

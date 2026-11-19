@@ -5,10 +5,17 @@ using UnityEngine.InputSystem;
 
 public class FirstPersonController : MonoBehaviour
 {
+    public enum InputDevice
+    {
+        mouse,
+        gamepad,
+        invalid
+    }
+
     #region Properties
     public Vector2 MoveInput { get; private set; }
     public Vector2 LookInput { get; private set; }
-    public bool IsUsingMouse { get; private set; }
+    public InputDevice Device { get; private set; }
     #endregion
 
 
@@ -48,7 +55,8 @@ public class FirstPersonController : MonoBehaviour
 
     private void LateUpdate()
     {
-        LookInput = Vector2.zero;
+        if (Device == InputDevice.mouse)
+            LookInput = Vector2.zero;
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -58,6 +66,11 @@ public class FirstPersonController : MonoBehaviour
     private void OnLook(InputAction.CallbackContext context)
     {
         LookInput = context.ReadValue<Vector2>();
-        IsUsingMouse = context.control.device is Mouse;
+        Device = context.control.device switch
+        {
+            Mouse => InputDevice.mouse,
+            Gamepad => InputDevice.gamepad,
+            _ => InputDevice.invalid
+        };
     }
 }
