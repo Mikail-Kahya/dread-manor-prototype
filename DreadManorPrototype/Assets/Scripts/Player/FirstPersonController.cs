@@ -1,21 +1,13 @@
-using Assets.Scripts.Helpers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class FirstPersonController : MonoBehaviour
 {
-    public enum InputDevice
-    {
-        mouse,
-        gamepad,
-        invalid
-    }
-
     #region Properties
     public Vector2 MoveInput { get; private set; }
     public Vector2 LookInput { get; private set; }
-    public InputDevice Device { get; private set; }
+    public Player.InputDevice Device { get; private set; }
     #endregion
 
 
@@ -55,7 +47,7 @@ public class FirstPersonController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (Device == InputDevice.mouse)
+        if (Device == Player.InputDevice.mouse)
             LookInput = Vector2.zero;
     }
 
@@ -68,9 +60,9 @@ public class FirstPersonController : MonoBehaviour
         LookInput = context.ReadValue<Vector2>();
         Device = context.control.device switch
         {
-            Mouse => InputDevice.mouse,
-            Gamepad => InputDevice.gamepad,
-            _ => InputDevice.invalid
+            Mouse => Player.InputDevice.mouse,
+            Gamepad => Player.InputDevice.gamepad,
+            _ => Player.InputDevice.invalid
         };
     }
 }

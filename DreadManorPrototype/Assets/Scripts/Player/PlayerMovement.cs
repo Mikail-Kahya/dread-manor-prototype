@@ -2,11 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    #region DataAdjustable
-    [SerializeField] private float MovementSpeed = 5;
-    [SerializeField] private float JumpHeight = 1;
-    #endregion
-
+    [SerializeField] private PlayerSettings Settings;
     [SerializeField] private FirstPersonController Controller;
 
     void FixedUpdate()
@@ -15,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector2 moveInput = Controller.MoveInput;
             Vector3 movement = moveInput.y * transform.forward + moveInput.x * transform.right;
-            transform.position += Time.fixedDeltaTime * MovementSpeed * movement;
+            transform.position += Time.fixedDeltaTime * Settings.WalkSpeed * movement;
         }
     }
 }

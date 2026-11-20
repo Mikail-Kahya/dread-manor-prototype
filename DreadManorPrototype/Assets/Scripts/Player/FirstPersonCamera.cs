@@ -1,28 +1,8 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-
-using InputDevice = FirstPersonController.InputDevice;
 
 public class FirstPersonCamera : MonoBehaviour
 {
-    [Serializable]
-    public struct CameraSpeed
-    {
-        public InputDevice device;
-        public Vector2 speed;
-    }
-
-    #region DataAdjustable
-    [SerializeField] private float PitchClamp = 90f;
-    [SerializeField]
-    private List<CameraSpeed> CameraSpeeds = new List<CameraSpeed>
-    {
-        new CameraSpeed { device = InputDevice.mouse, speed = new Vector2(0.1f, 0.1f) },
-        new CameraSpeed { device = InputDevice.gamepad, speed = new Vector2(180f, 180f) }
-    };
-    #endregion
-
+    [SerializeField] private PlayerSettings Settings;
     [SerializeField] private FirstPersonController Controller;
     [SerializeField] private Transform Camera;
 
@@ -41,14 +21,14 @@ public class FirstPersonCamera : MonoBehaviour
     {
         if (Controller != null)
         {
-            float deltaRot = Controller.Device == InputDevice.mouse ? 1f : Time.deltaTime;
-            Vector2 cameraSpeed = CameraSpeeds.Find(speed => speed.device == Controller.Device).speed;
-
+            float deltaRot = Controller.Device == Player.InputDevice.mouse ? 1f : Time.deltaTime;
+            Vector2 cameraSpeed = Settings.GetCameraSpeed(Controller.Device);
+            
             Vector2 lookInput = Controller.LookInput;
             _pitch -= lookInput.y * cameraSpeed.x * deltaRot;
             _yaw += lookInput.x * cameraSpeed.y * deltaRot;
-
-            _pitch = Mathf.Clamp(_pitch, -PitchClamp, PitchClamp);
+            
+            _pitch = Mathf.Clamp(_pitch, -Settings.PitchClamp, Settings.PitchClamp);
             _yaw = _yaw % 360f;
         }
 

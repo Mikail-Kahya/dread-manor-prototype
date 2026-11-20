@@ -57,16 +57,6 @@
                     "priority": 0
                 },
                 {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "d82bb5c3-4612-4f3e-a437-74cbc224a807",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false,
-                    "priority": 0
-                },
-                {
                     "name": "Flashlight",
                     "type": "Button",
                     "id": "d0ad61dd-4144-4bd3-850f-0774c5fcae49",
@@ -284,28 +274,6 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1fe1b182-c7be-4fab-be88-654e48c2bd09",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5cdf1c11-7f49-4953-af1a-e53ff51c2862",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
