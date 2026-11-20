@@ -12,8 +12,8 @@ public class FirstPersonController : MonoBehaviour
     #endregion
 
     #region Events
-    public event Action<bool> OnCrouchChanged;
-    public event Action<bool> OnSprintChanged;
+    public event Action<bool> OnCrouchChangedEvent;
+    public event Action<bool> OnSprintChangedEvent;
     public event Action OnInteractEvent;
     #endregion
 

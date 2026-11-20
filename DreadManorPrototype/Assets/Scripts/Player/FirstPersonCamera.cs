@@ -15,12 +15,12 @@ public class FirstPersonCamera : MonoBehaviour
         _pitch = euler.x;
         _yaw = euler.y;
 
-        Controller.OnCrouchChanged += SetCrouchHeight;
+        Controller.OnCrouchChangedEvent += SetCrouchHeight;
     }
 
     private void OnDestroy()
     {
-        Controller.OnCrouchChanged -= SetCrouchHeight;
+        Controller.OnCrouchChangedEvent -= SetCrouchHeight;
     }
 
     void Update()

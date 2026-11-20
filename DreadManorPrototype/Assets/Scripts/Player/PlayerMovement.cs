@@ -13,14 +13,14 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         PlayerStamina.SetStaminaSettings(Settings.Stamina, Settings.StaminaRegenDelay, Settings.StaminaRegenRate);
-        Controller.OnSprintChanged += ToggleSprint;
-        Controller.OnCrouchChanged += ToggleCrouch;
+        Controller.OnSprintChangedEvent += ToggleSprint;
+        Controller.OnCrouchChangedEvent += ToggleCrouch;
     }
 
     private void OnDestroy()
     {
-        Controller.OnSprintChanged -= ToggleSprint;
-        Controller.OnCrouchChanged -= ToggleCrouch;
+        Controller.OnSprintChangedEvent -= ToggleSprint;
+        Controller.OnCrouchChangedEvent -= ToggleCrouch;
     }
 
     void FixedUpdate()
