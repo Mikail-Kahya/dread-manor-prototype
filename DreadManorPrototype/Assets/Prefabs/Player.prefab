@@ -283,6 +283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4665556072993982867}
+  - component: {fileID: 6737170624733097940}
   m_Layer: 0
   m_Name: CameraPivot
   m_TagString: Untagged
@@ -307,6 +308,23 @@ Transform:
   - {fileID: 5886151590297892251}
   m_Father: {fileID: 3344777565915490792}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6737170624733097940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7001826429661677961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6232e39676bf0c742bc42f319210815f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FirstPersonInteracter
+  Settings: {fileID: 11400000, guid: 8e4eb1612ca2eb34580e24a518a7b98c, type: 2}
+  Controller: {fileID: 8691116645348939356}
+  OnHoverInteractable:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7680454630557064030
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,3 +30,8 @@ MonoBehaviour:
   StandingColliderHeight: 1.8
   CrouchHeight: 1
   CrouchColliderHeight: 1.1
+  InteractRange: 3
+  InteractSphereRadius: 0.1
+  InteractLayerMask:
+    serializedVersion: 2
+    m_Bits: 64

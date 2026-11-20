@@ -29,6 +29,10 @@ public class PlayerSettings : ScriptableObject
     [Tooltip("meters")] public float CrouchHeight = 1f;
     [Tooltip("meters")] public float CrouchColliderHeight = 1.1f;
 
+    [Header("Interacting")]
+    [Tooltip("meters")] public float InteractRange = 3f;
+    [Tooltip("meters")] public float InteractSphereRadius = 0.1f;
+    [Tooltip("Layer Mask")] public LayerMask InteractLayerMask;
 
     public Vector2 GetCameraSpeed(InputDevice device)
     {

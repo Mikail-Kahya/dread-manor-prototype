@@ -19,5 +19,36 @@ namespace DM
         {
             return Mathf.Abs(val1 - val2) < epsilon;
         }
+
+        public struct SphereCastInfo
+        {
+            public Vector3 position;
+            public Vector3 direction;
+            public float radius;
+            public float range;
+            public LayerMask layers; 
+        }
+
+        public static bool SphereCastForInterface<T>(out T foundInterface, out RaycastHit validHit, SphereCastInfo castInfo) where T : class
+        {
+            foundInterface = null;
+            validHit = default;
+
+            RaycastHit[] hits = Physics.SphereCastAll(castInfo.position, castInfo.radius, castInfo.direction, castInfo.range, castInfo.layers);
+
+            System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+               
+            foreach (RaycastHit hit in hits)
+            {
+                if (hit.collider.gameObject.TryGetComponent(out T target))
+                {
+                    foundInterface = target;
+                    validHit = hit;
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
