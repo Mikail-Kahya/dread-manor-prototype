@@ -40,7 +40,8 @@ namespace DM
                
             foreach (RaycastHit hit in hits)
             {
-                if (hit.collider.gameObject.TryGetComponent(out T target))
+                T target = hit.collider.GetComponentInParent<T>();
+                if (target != null)
                 {
                     foundInterface = target;
                     validHit = hit;

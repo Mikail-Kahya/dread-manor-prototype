@@ -14,6 +14,7 @@ public class FirstPersonController : MonoBehaviour
     #region Events
     public event Action<bool> OnCrouchChanged;
     public event Action<bool> OnSprintChanged;
+    public event Action OnInteractEvent;
     #endregion
 
     private PlayerInput _inputActions;
@@ -41,6 +42,7 @@ public class FirstPersonController : MonoBehaviour
         _inputActions.Player.Sprint.canceled += OnSprint;
         _inputActions.Player.Crouch.performed += OnCrouch;
         _inputActions.Player.Crouch.canceled += OnCrouch;
+        _inputActions.Player.Interact.performed += OnInteract;
     }
 
     private void OnDisable()
@@ -54,6 +56,7 @@ public class FirstPersonController : MonoBehaviour
         _inputActions.Player.Sprint.canceled -= OnSprint;
         _inputActions.Player.Crouch.performed -= OnCrouch;
         _inputActions.Player.Crouch.canceled -= OnCrouch;
+        _inputActions.Player.Interact.performed -= OnInteract;
     }
 
     private void LateUpdate()
@@ -79,11 +82,16 @@ public class FirstPersonController : MonoBehaviour
 
     private void OnSprint(InputAction.CallbackContext context)
     {
-        OnSprintChanged?.Invoke(context.ReadValueAsButton());
+        OnSprintChangedEvent?.Invoke(context.ReadValueAsButton());
     }
 
     private void OnCrouch(InputAction.CallbackContext context)
     {
-        OnCrouchChanged?.Invoke(context.ReadValueAsButton());
+        OnCrouchChangedEvent?.Invoke(context.ReadValueAsButton());
+    }
+
+    private void OnInteract(InputAction.CallbackContext context)
+    {
+        OnInteractEvent?.Invoke();
     }
 }

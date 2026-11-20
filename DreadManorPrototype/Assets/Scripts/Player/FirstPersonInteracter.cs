@@ -3,23 +3,31 @@ using UnityEngine.Events;
 
 using DM;
 
+// Check for interaction every frame to enable highlighting
+
 public class FirstPersonInteracter : MonoBehaviour
 {
     [SerializeField] private PlayerSettings Settings;
     [SerializeField] private FirstPersonController Controller;
-    [SerializeField] private UnityEvent<IInteractable> OnHoverInteractable;
 
-    void Start()
+    public IInteractable HoveredInterable {  get; private set; }
+
+    private void Awake()
     {
-        
+        Controller.OnInteractEvent += Interact;
     }
 
-    
+    private void OnDestroy()
+    {
+        Controller.OnInteractEvent -= Interact;
+    }
+
     void Update()
     {
         IInteractable interactable;
         RaycastHit hitInfo;
-        MathHelpers.SphereCastInfo castInfo = new MathHelpers.SphereCastInfo {
+        MathHelpers.SphereCastInfo castInfo = new MathHelpers.SphereCastInfo
+        {
             position = transform.position,
             direction = transform.forward,
             radius = Settings.InteractSphereRadius,
@@ -27,11 +35,25 @@ public class FirstPersonInteracter : MonoBehaviour
             layers = Settings.InteractLayerMask
         };
 
-        bool hitInteracble = MathHelpers.SphereCastForInterface<IInteractable>(out interactable, out hitInfo, castInfo);
-        
+        bool hitInteracble = MathHelpers.SphereCastForInterface(out interactable, out hitInfo, castInfo);
+
         if (hitInteracble)
         {
-            Debug.Log(hitInfo.collider.gameObject.name);
+            if (interactable != HoveredInterable)
+            {
+                HoveredInterable?.UnHighlight();
+                HoveredInterable = interactable;
+                HoveredInterable.Highlight();
+            }
         }
+        else if (HoveredInterable != null)
+        {
+            HoveredInterable.UnHighlight();
+            HoveredInterable = null;
+        }
+    }
+    void Interact()
+    {
+        HoveredInterable?.Interact();
     }
 }
