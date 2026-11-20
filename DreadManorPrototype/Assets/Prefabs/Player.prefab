@@ -114,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonCamera
   Settings: {fileID: 11400000, guid: 8e4eb1612ca2eb34580e24a518a7b98c, type: 2}
   Controller: {fileID: 8691116645348939356}
-  Camera: {fileID: 4665556072993982867}
+  CameraTransform: {fileID: 4665556072993982867}
 --- !u!114 &5125364262194381524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +130,7 @@ MonoBehaviour:
   Settings: {fileID: 11400000, guid: 8e4eb1612ca2eb34580e24a518a7b98c, type: 2}
   Controller: {fileID: 8691116645348939356}
   PlayerStamina: {fileID: 3139121122354085578}
+  Collider: {fileID: 2319688670605421934}
 --- !u!114 &3139121122354085578
 MonoBehaviour:
   m_ObjectHideFlags: 0

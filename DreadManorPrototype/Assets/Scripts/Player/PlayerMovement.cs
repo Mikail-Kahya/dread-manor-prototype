@@ -6,19 +6,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerSettings Settings;
     [SerializeField] private FirstPersonController Controller;
     [SerializeField] private StaminaGuage PlayerStamina;
+    [SerializeField] private CapsuleCollider Collider;
 
-    bool _isSprinting;
-    bool _isCrouching;
+    private bool _isCrouching;
 
     private void Awake()
     {
         PlayerStamina.SetStaminaSettings(Settings.Stamina, Settings.StaminaRegenDelay, Settings.StaminaRegenRate);
         Controller.OnSprintChanged += ToggleSprint;
+        Controller.OnCrouchChanged += ToggleCrouch;
     }
 
     private void OnDestroy()
     {
         Controller.OnSprintChanged -= ToggleSprint;
+        Controller.OnCrouchChanged -= ToggleCrouch;
     }
 
     void FixedUpdate()
@@ -32,17 +34,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_isCrouching)
             return Settings.CrouchSpeed;
-        if (_isSprinting && PlayerStamina.IsDraining)
+        if (PlayerStamina.IsDraining)
             return Settings.SprintSpeed;
         return Settings.WalkSpeed;
     }
 
     private void ToggleSprint(bool isSprinting)
     {
-        _isSprinting = isSprinting;
         if (isSprinting)
             PlayerStamina.Drain();
         else
             PlayerStamina.Regen();
+    }
+
+    private void ToggleCrouch(bool isCrouching)
+    {
+        _isCrouching = isCrouching;
+        float newHeight = isCrouching ? Settings.CrouchColliderHeight : Settings.StandingColliderHeight;
+        float currentHeight = Collider.height;
+        Collider.height = newHeight;
+        Collider.center += new Vector3(0f, (newHeight - currentHeight) * 0.5f, 0f);
     }
 }

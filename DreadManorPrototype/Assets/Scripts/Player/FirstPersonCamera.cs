@@ -4,7 +4,7 @@ public class FirstPersonCamera : MonoBehaviour
 {
     [SerializeField] private PlayerSettings Settings;
     [SerializeField] private FirstPersonController Controller;
-    [SerializeField] private Transform Camera;
+    [SerializeField] private Transform CameraTransform;
 
     private float _yaw; // 0 - 360
     private float _pitch;
@@ -14,8 +14,14 @@ public class FirstPersonCamera : MonoBehaviour
         Vector3 euler = transform.rotation.eulerAngles;
         _pitch = euler.x;
         _yaw = euler.y;
+
+        Controller.OnCrouchChanged += SetCrouchHeight;
     }
 
+    private void OnDestroy()
+    {
+        Controller.OnCrouchChanged -= SetCrouchHeight;
+    }
 
     void Update()
     {
@@ -29,7 +35,12 @@ public class FirstPersonCamera : MonoBehaviour
         _pitch = Mathf.Clamp(_pitch, -Settings.PitchClamp, Settings.PitchClamp);
         _yaw = _yaw % 360f;
 
-        Camera.localRotation = Quaternion.Euler(_pitch, 0, 0);
+        CameraTransform.localRotation = Quaternion.Euler(_pitch, 0, 0);
         transform.rotation = Quaternion.Euler(0, _yaw, 0);
+    }
+
+    private void SetCrouchHeight(bool isCrouching)
+    {
+        CameraTransform.localPosition = new Vector3(0f, isCrouching ? Settings.CrouchHeight : Settings.StandingHeight, 0f);
     }
 }

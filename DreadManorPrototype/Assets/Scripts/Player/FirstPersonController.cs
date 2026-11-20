@@ -39,6 +39,8 @@ public class FirstPersonController : MonoBehaviour
         _inputActions.Player.Look.performed += OnLook;
         _inputActions.Player.Sprint.performed += OnSprint;
         _inputActions.Player.Sprint.canceled += OnSprint;
+        _inputActions.Player.Crouch.performed += OnCrouch;
+        _inputActions.Player.Crouch.canceled += OnCrouch;
     }
 
     private void OnDisable()
@@ -50,6 +52,8 @@ public class FirstPersonController : MonoBehaviour
         _inputActions.Player.Look.performed -= OnLook;
         _inputActions.Player.Sprint.performed -= OnSprint;
         _inputActions.Player.Sprint.canceled -= OnSprint;
+        _inputActions.Player.Crouch.performed -= OnCrouch;
+        _inputActions.Player.Crouch.canceled -= OnCrouch;
     }
 
     private void LateUpdate()
@@ -76,5 +80,10 @@ public class FirstPersonController : MonoBehaviour
     private void OnSprint(InputAction.CallbackContext context)
     {
         OnSprintChanged?.Invoke(context.ReadValueAsButton());
+    }
+
+    private void OnCrouch(InputAction.CallbackContext context)
+    {
+        OnCrouchChanged?.Invoke(context.ReadValueAsButton());
     }
 }

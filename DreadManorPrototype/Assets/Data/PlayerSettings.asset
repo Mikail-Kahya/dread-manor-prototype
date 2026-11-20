@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSettings
   WalkSpeed: 3
   SprintSpeed: 8
-  CrouchSpeed: 1
+  CrouchSpeed: 0.5
   Stamina: 1
   StaminaRegenDelay: 1
   StaminaRegenRate: 1
@@ -26,5 +26,7 @@ MonoBehaviour:
   - device: 2
     speed: {x: 1, y: 1}
   PitchClamp: 85
-  StandingHeight: 2
+  StandingHeight: 1.7
+  StandingColliderHeight: 1.8
   CrouchHeight: 1
+  CrouchColliderHeight: 1.1

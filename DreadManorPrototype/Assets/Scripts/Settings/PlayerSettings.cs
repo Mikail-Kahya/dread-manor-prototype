@@ -24,8 +24,10 @@ public class PlayerSettings : ScriptableObject
     [Tooltip("degrees")] public float PitchClamp = 85f;
 
     [Header("Crouching")]
-    [Tooltip("meters")] public float StandingHeight = 2f;
+    [Tooltip("meters")] public float StandingHeight = 1.7f;
+    [Tooltip("meters")] public float StandingColliderHeight = 1.8f;
     [Tooltip("meters")] public float CrouchHeight = 1f;
+    [Tooltip("meters")] public float CrouchColliderHeight = 1.1f;
 
 
     public Vector2 GetCameraSpeed(InputDevice device)
