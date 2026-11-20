@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15f54964534ebba40b4231d6613b9923, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSettings
-  WalkSpeed: 5
+  WalkSpeed: 3
   SprintSpeed: 8
-  CrouchSpeed: 2.5
-  JumpForce: 5
+  CrouchSpeed: 1
+  Stamina: 1
+  StaminaRegenDelay: 1
+  StaminaRegenRate: 1
   CameraSpeeds:
   - device: 0
     speed: {x: 0.1, y: 0.1}

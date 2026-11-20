@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -10,10 +11,12 @@ public class FirstPersonController : MonoBehaviour
     public Player.InputDevice Device { get; private set; }
     #endregion
 
+    #region Events
+    public event Action<bool> OnCrouchChanged;
+    public event Action<bool> OnSprintChanged;
+    #endregion
 
     private PlayerInput _inputActions;
-
-    private UnityEvent<int> OnCrouchEvent;
 
 
     private void Awake()
@@ -34,6 +37,8 @@ public class FirstPersonController : MonoBehaviour
         _inputActions.Player.Move.performed += OnMove;
         _inputActions.Player.Move.canceled += OnMove;
         _inputActions.Player.Look.performed += OnLook;
+        _inputActions.Player.Sprint.performed += OnSprint;
+        _inputActions.Player.Sprint.canceled += OnSprint;
     }
 
     private void OnDisable()
@@ -43,6 +48,8 @@ public class FirstPersonController : MonoBehaviour
         _inputActions.Player.Move.performed -= OnMove;
         _inputActions.Player.Move.canceled -= OnMove;
         _inputActions.Player.Look.performed -= OnLook;
+        _inputActions.Player.Sprint.performed -= OnSprint;
+        _inputActions.Player.Sprint.canceled -= OnSprint;
     }
 
     private void LateUpdate()
@@ -64,5 +71,10 @@ public class FirstPersonController : MonoBehaviour
             Gamepad => Player.InputDevice.gamepad,
             _ => Player.InputDevice.invalid
         };
+    }
+
+    private void OnSprint(InputAction.CallbackContext context)
+    {
+        OnSprintChanged?.Invoke(context.ReadValueAsButton());
     }
 }

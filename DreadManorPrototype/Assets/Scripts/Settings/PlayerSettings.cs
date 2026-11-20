@@ -10,6 +10,9 @@ public class PlayerSettings : ScriptableObject
     [Tooltip("m/s")] public float WalkSpeed = 5f;
     [Tooltip("m/s")] public float SprintSpeed = 8f;
     [Tooltip("m/s")] public float CrouchSpeed = 2.5f;
+    [Tooltip("seconds")] public float Stamina = 4f;
+    [Tooltip("seconds")] public float StaminaRegenDelay = 1f;
+    [Tooltip("s/s")] public float StaminaRegenRate = 1f;
 
     [Header("Look")]
     [SerializeField] private List<CameraSpeed> CameraSpeeds = new List<CameraSpeed>

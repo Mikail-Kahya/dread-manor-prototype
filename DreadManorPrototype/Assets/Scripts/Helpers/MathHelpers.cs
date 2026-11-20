@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Helpers
+namespace DM
 {
     public static class MathHelpers
     {
@@ -13,6 +13,11 @@ namespace Helpers
         public static bool IsNearlyZero(Vector2 vec, float epsilon = FLT_EPSILON)
         {
             return vec.sqrMagnitude < epsilon;
+        }
+
+        public static bool IsEqual(float val1, float val2, float epsilon = FLT_EPSILON)
+        {
+            return Mathf.Abs(val1 - val2) < epsilon;
         }
     }
 }

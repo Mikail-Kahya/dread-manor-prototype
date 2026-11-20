@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8691116645348939356}
   - component: {fileID: 3730615820793124667}
   - component: {fileID: 5125364262194381524}
+  - component: {fileID: 3139121122354085578}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -128,6 +129,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   Settings: {fileID: 11400000, guid: 8e4eb1612ca2eb34580e24a518a7b98c, type: 2}
   Controller: {fileID: 8691116645348939356}
+  PlayerStamina: {fileID: 3139121122354085578}
+--- !u!114 &3139121122354085578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525953548101018116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 225cd72d98e53e240bc241f395a87790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StaminaGuage
+  MaxStamina: 4
+  StaminaRegenDelay: 1
+  StaminaRegenRate: 1
 --- !u!1 &4701003856182065912
 GameObject:
   m_ObjectHideFlags: 0
