@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 3344777565915490792}
   - component: {fileID: 5145778689085741330}
   - component: {fileID: 2319688670605421934}
+  - component: {fileID: 7625236874483376564}
   - component: {fileID: 8691116645348939356}
+  - component: {fileID: 7427519987289246161}
   - component: {fileID: 3730615820793124667}
   - component: {fileID: 5125364262194381524}
   - component: {fileID: 3139121122354085578}
@@ -88,6 +90,18 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &7625236874483376564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525953548101018116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bcd8eeec49548949ba85da5b8b1f626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControllerSwapper
 --- !u!114 &8691116645348939356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +114,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8063f98692efa34aaf19c4a866ab483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &7427519987289246161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525953548101018116}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0e183a6c95dab4e9c971854a90aca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractController
+  ExamineAnchorTransform: {fileID: 3622441766840694521}
 --- !u!114 &3730615820793124667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +301,37 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &5291585005548853670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3622441766840694521}
+  m_Layer: 0
+  m_Name: InspectAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3622441766840694521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5291585005548853670}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4665556072993982867}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7001826429661677961
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,6 +364,7 @@ Transform:
   m_Children:
   - {fileID: 6042829023539800100}
   - {fileID: 5886151590297892251}
+  - {fileID: 3622441766840694521}
   m_Father: {fileID: 3344777565915490792}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6737170624733097940
@@ -322,9 +381,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonInteracter
   Settings: {fileID: 11400000, guid: 8e4eb1612ca2eb34580e24a518a7b98c, type: 2}
   Controller: {fileID: 8691116645348939356}
-  OnHoverInteractable:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &7680454630557064030
 GameObject:
   m_ObjectHideFlags: 0
