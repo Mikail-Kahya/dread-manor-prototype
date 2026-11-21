@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 using DM;
 
@@ -8,18 +7,18 @@ using DM;
 public class FirstPersonInteracter : MonoBehaviour
 {
     [SerializeField] private PlayerSettings Settings;
-    [SerializeField] private FirstPersonController Controller;
+    [SerializeField] private ControllerSwapper ControllerSwapper;
 
     public IInteractable HoveredInterable {  get; private set; }
 
-    private void Awake()
+    private void Start()
     {
-        Controller.OnInteractEvent += Interact;
+        ControllerSwapper.PlayController.OnInteractEvent += Interact;
     }
 
     private void OnDestroy()
     {
-        Controller.OnInteractEvent -= Interact;
+        ControllerSwapper.PlayController.OnInteractEvent -= Interact;
     }
 
     void Update()
@@ -41,19 +40,28 @@ public class FirstPersonInteracter : MonoBehaviour
         {
             if (interactable != HoveredInterable)
             {
-                HoveredInterable?.UnHighlight(Controller.gameObject);
+                HoveredInterable?.UnHighlight(ControllerSwapper.gameObject);
                 HoveredInterable = interactable;
-                HoveredInterable.Highlight(Controller.gameObject);
+                HoveredInterable.Highlight(ControllerSwapper.gameObject);
             }
         }
         else if (HoveredInterable != null)
         {
-            HoveredInterable.UnHighlight(Controller.gameObject);
+            HoveredInterable.UnHighlight(ControllerSwapper.gameObject);
             HoveredInterable = null;
         }
     }
     void Interact()
     {
-        HoveredInterable?.Interact(Controller.gameObject);
+        if (HoveredInterable != null)
+        {
+            HoveredInterable.Interact(ControllerSwapper.gameObject);
+
+            if (HoveredInterable is IExaminable examinable)
+            {
+                ControllerSwapper.Swap(ControllerSwapper.Controller.examine);
+                examinable.Examine();
+            }
+        }
     }
 }

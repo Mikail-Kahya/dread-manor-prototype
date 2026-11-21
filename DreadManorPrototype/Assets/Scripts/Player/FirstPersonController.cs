@@ -23,12 +23,6 @@ public class FirstPersonController : MonoBehaviour
     private void Awake()
     {
         _inputActions = new PlayerInput();
-    }
-
-    private void OnEnable()
-    {
-        _inputActions.Player.Enable();
-        Cursor.lockState = CursorLockMode.Locked;
 
         _inputActions.Player.Move.performed += OnMove;
         _inputActions.Player.Move.canceled += OnMove;
@@ -40,10 +34,8 @@ public class FirstPersonController : MonoBehaviour
         _inputActions.Player.Interact.performed += OnInteract;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        _inputActions.Player.Disable();
-
         _inputActions.Player.Move.performed -= OnMove;
         _inputActions.Player.Move.canceled -= OnMove;
         _inputActions.Player.Look.performed -= OnLook;
@@ -52,6 +44,17 @@ public class FirstPersonController : MonoBehaviour
         _inputActions.Player.Crouch.performed -= OnCrouch;
         _inputActions.Player.Crouch.canceled -= OnCrouch;
         _inputActions.Player.Interact.performed -= OnInteract;
+    }
+
+    private void OnEnable()
+    {
+        _inputActions.Player.Enable();
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void OnDisable()
+    {
+        _inputActions.Player.Disable();
     }
 
     private void LateUpdate()

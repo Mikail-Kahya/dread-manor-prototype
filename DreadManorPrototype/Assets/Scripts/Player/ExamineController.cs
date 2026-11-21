@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 
 public class ExamineController : MonoBehaviour
 {
-    [SerializeField] private Transform ExamineAnchorTransform;
-
     public event Action OnExitEvent;
+
+    [SerializeField] private Transform ExamineAnchorTransform;
 
     private PlayerInput _inputActions;
 
@@ -14,14 +14,19 @@ public class ExamineController : MonoBehaviour
     private void Awake()
     {
         _inputActions = new PlayerInput();
+
+        _inputActions.Examine.Exit.performed += OnExit;
+    }
+
+    private void OnDestroy()
+    {
+        _inputActions.Examine.Exit.performed -= OnExit;
     }
 
     private void OnEnable()
     {
         _inputActions.Examine.Enable();
         Cursor.lockState = CursorLockMode.Locked;
-
-        _inputActions.Examine.Exit.performed += OnExit;
     }
 
     private void OnDisable()

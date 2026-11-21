@@ -380,7 +380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonInteracter
   Settings: {fileID: 11400000, guid: 8e4eb1612ca2eb34580e24a518a7b98c, type: 2}
-  Controller: {fileID: 8691116645348939356}
+  ControllerSwapper: {fileID: 7625236874483376564}
 --- !u!1 &7680454630557064030
 GameObject:
   m_ObjectHideFlags: 0

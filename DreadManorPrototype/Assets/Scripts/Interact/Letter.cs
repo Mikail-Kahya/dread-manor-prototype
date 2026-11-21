@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class Letter : MonoBehaviour, IInteractable
+public class Letter : MonoBehaviour, IInteractable, IExaminable
 {
     // Letter has script on a texture
     // Letter can be moved parallel to the camera in 3d
@@ -11,10 +11,7 @@ public class Letter : MonoBehaviour, IInteractable
 
     public void Interact(GameObject interacter)
     {
-        if (interacter.TryGetComponent(out ControllerSwapper examine))
-        {
-            examine.Swap(ControllerSwapper.Controller.examine);
-        }
+        
     }
     public void Highlight(GameObject interacter)
     {
@@ -24,6 +21,11 @@ public class Letter : MonoBehaviour, IInteractable
     public void UnHighlight(GameObject interacter)
     {
         Debug.Log("UnHighlight: " + gameObject.name);
+    }
+
+    public void Examine()
+    {
+        
     }
 
     private void OnValidate()

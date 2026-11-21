@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(FirstPersonController), typeof(ExamineController))]
@@ -46,7 +45,8 @@ public class ControllerSwapper : MonoBehaviour
         _currentController = type switch
         {
             Controller.play => _playController,
-            Controller.examine => _examineController
+            Controller.examine => _examineController,
+            _ => throw new System.NotImplementedException()
         };
 
         _currentController.enabled = true;
