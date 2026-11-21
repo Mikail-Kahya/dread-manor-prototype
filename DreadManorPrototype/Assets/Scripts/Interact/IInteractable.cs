@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    public void Interact();
-    public void Highlight();
-    public void UnHighlight();
+    public void Interact(GameObject interacter);
+    public void Highlight(GameObject interacter);
+    public void UnHighlight(GameObject interacter);
 }

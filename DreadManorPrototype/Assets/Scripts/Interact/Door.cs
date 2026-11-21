@@ -9,18 +9,18 @@ namespace Assets.Scripts.Interact
         [SerializeField] private bool IsOpen = false;
         [SerializeField] private bool CanClose = true;
 
-        public void Interact()
+        public void Interact(GameObject interacter)
         {
             IsOpen = CanClose ? !IsOpen : true;
             SetDoorState(IsOpen);
         }
 
-        public void Highlight()
+        public void Highlight(GameObject interacter)
         {
             Debug.Log("Highlight: " + gameObject.name);
         }
 
-        public void UnHighlight()
+        public void UnHighlight(GameObject interacter)
         {
             Debug.Log("UnHighlight: " + gameObject.name);
         }

@@ -41,19 +41,19 @@ public class FirstPersonInteracter : MonoBehaviour
         {
             if (interactable != HoveredInterable)
             {
-                HoveredInterable?.UnHighlight();
+                HoveredInterable?.UnHighlight(Controller.gameObject);
                 HoveredInterable = interactable;
-                HoveredInterable.Highlight();
+                HoveredInterable.Highlight(Controller.gameObject);
             }
         }
         else if (HoveredInterable != null)
         {
-            HoveredInterable.UnHighlight();
+            HoveredInterable.UnHighlight(Controller.gameObject);
             HoveredInterable = null;
         }
     }
     void Interact()
     {
-        HoveredInterable?.Interact();
+        HoveredInterable?.Interact(Controller.gameObject);
     }
 }

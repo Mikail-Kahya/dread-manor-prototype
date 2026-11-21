@@ -27,11 +27,6 @@ public class FirstPersonController : MonoBehaviour
 
     private void OnEnable()
     {
-        if( _inputActions == null )
-        {
-            _inputActions = new PlayerInput();
-        }
-
         _inputActions.Player.Enable();
         Cursor.lockState = CursorLockMode.Locked;
 
