@@ -1,6 +1,7 @@
 using UnityEngine;
 
 using DM;
+using UnityEngine.Events;
 
 // Check for interaction every frame to enable highlighting
 
@@ -8,6 +9,7 @@ public class FirstPersonInteracter : MonoBehaviour
 {
     [SerializeField] private PlayerSettings Settings;
     [SerializeField] private ControllerSwapper ControllerSwapper;
+    [SerializeField] private Transform ExamineAnchor;
 
     public IInteractable HoveredInterable {  get; private set; }
 
@@ -59,6 +61,7 @@ public class FirstPersonInteracter : MonoBehaviour
 
             if (HoveredInterable is IExaminable examinable)
             {
+                ControllerSwapper.ExamineController.AttachExamine(examinable);
                 ControllerSwapper.Swap(ControllerSwapper.Controller.examine);
                 examinable.Examine();
             }
