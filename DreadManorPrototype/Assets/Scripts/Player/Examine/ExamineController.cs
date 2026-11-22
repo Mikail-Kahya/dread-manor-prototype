@@ -8,11 +8,12 @@ public class ExamineController : MonoBehaviour
     #region Events
     public event Action OnEnterEvent;
     public event Action OnExitEvent;
-    [SerializeField] private UnityEvent<IExaminable> OnExamineEvent;
+    public event Action <GameObject> OnExamineEvent;
+    public event Action<GameObject> OnExamineEndEvent;
     #endregion
 
     private PlayerInput _inputActions;
-    private IExaminable _examineObject;
+    private GameObject _examineObject;
 
     private void Awake()
     {
@@ -40,6 +41,10 @@ public class ExamineController : MonoBehaviour
     private void OnDisable()
     {
         _inputActions.Examine.Disable();
+        if (_examineObject != null)
+            OnExamineEndEvent?.Invoke(_examineObject);
+        else
+            throw new Exception("ExamineController can't end examination on an empty object");
     }
 
     private void OnExit(InputAction.CallbackContext context)
@@ -49,6 +54,9 @@ public class ExamineController : MonoBehaviour
 
     public void AttachExamine(IExaminable examinable)
     {
-        examinable = _examineObject;
+        if (examinable is MonoBehaviour examineObject)
+            _examineObject = examineObject.gameObject;
+        else
+            _examineObject = null;
     }
 }

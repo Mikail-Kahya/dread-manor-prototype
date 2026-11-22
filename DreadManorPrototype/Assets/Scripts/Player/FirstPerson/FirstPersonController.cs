@@ -55,6 +55,8 @@ public class FirstPersonController : MonoBehaviour
     private void OnDisable()
     {
         _inputActions.Player.Disable();
+        LookInput = Vector3.zero;
+        MoveInput = Vector3.zero;
     }
 
     private void LateUpdate()

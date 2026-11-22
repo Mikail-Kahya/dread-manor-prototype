@@ -9,7 +9,6 @@ public class FirstPersonInteracter : MonoBehaviour
 {
     [SerializeField] private PlayerSettings Settings;
     [SerializeField] private ControllerSwapper ControllerSwapper;
-    [SerializeField] private Transform ExamineAnchor;
 
     public IInteractable HoveredInterable {  get; private set; }
 
