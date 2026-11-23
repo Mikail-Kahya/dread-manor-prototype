@@ -11,6 +11,8 @@ public class ExamineController : MonoBehaviour
     public event Action <IExaminable> OnExamineEvent;
     public event Action<IExaminable> OnExamineEndEvent;
     public event Action<float> OnScrollEvent;
+    public event Action OnNextEvent;
+    public event Action OnPrevEvent;
     #endregion
 
     private PlayerInput _inputActions;
@@ -22,12 +24,16 @@ public class ExamineController : MonoBehaviour
 
         _inputActions.Examine.Exit.performed += OnExit;
         _inputActions.Examine.Scroll.performed += OnScroll;
+        _inputActions.Examine.Next.performed += OnNext;
+        _inputActions.Examine.Previous.performed += OnPrev;
     }
 
     private void OnDestroy()
     {
         _inputActions.Examine.Exit.performed -= OnExit;
         _inputActions.Examine.Scroll.performed -= OnScroll;
+        _inputActions.Examine.Next.performed -= OnNext;
+        _inputActions.Examine.Previous.performed -= OnPrev;
     }
 
     private void OnEnable()
@@ -45,7 +51,11 @@ public class ExamineController : MonoBehaviour
     {
         _inputActions.Examine.Disable();
         if (_examineObject != null)
+        {
+            _examineObject.Release();
             OnExamineEndEvent?.Invoke(_examineObject);
+            _examineObject = null;
+        }
         else
             throw new Exception("ExamineController can't end examination on an empty object");
     }
@@ -63,5 +73,15 @@ public class ExamineController : MonoBehaviour
     {
         Vector2 input = context.ReadValue<Vector2>();
         OnScrollEvent?.Invoke(input.y);
+    }
+
+    private void OnNext(InputAction.CallbackContext context)
+    {
+        OnNextEvent?.Invoke();
+    }
+
+    private void OnPrev(InputAction.CallbackContext context)
+    {
+        OnPrevEvent?.Invoke();
     }
 }

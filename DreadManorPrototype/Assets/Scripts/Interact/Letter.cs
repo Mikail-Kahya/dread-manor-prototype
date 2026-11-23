@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -9,10 +10,16 @@ public class Letter : MonoBehaviour, IInteractable, IExaminable
     [SerializeField, TextArea] private string Text;
     [SerializeField] TextMeshPro LetterText;
 
+    ExamineController _controller;
+
     public void Interact(GameObject interacter)
     {
-        
+        _controller = interacter.GetComponent<ExamineController>();
+
+        _controller.OnNextEvent += NextPage;
+        _controller.OnPrevEvent += PrevPage;
     }
+
     public void Highlight(GameObject interacter)
     {
         Debug.Log("Highlight: " + gameObject.name);
@@ -28,6 +35,12 @@ public class Letter : MonoBehaviour, IInteractable, IExaminable
         
     }
 
+    public void Release()
+    {
+        _controller.OnNextEvent -= NextPage;
+        _controller.OnPrevEvent -= PrevPage;
+    }
+
     public string GetInfo()
     {
         return Text;
@@ -36,5 +49,15 @@ public class Letter : MonoBehaviour, IInteractable, IExaminable
     private void OnValidate()
     {
         LetterText.text = Text;
+    }
+
+    private void NextPage()
+    {
+        LetterText.pageToDisplay = Math.Min(LetterText.pageToDisplay + 1, LetterText.textInfo.pageCount);
+    }
+
+    private void PrevPage()
+    {
+        LetterText.pageToDisplay = Math.Max(LetterText.pageToDisplay - 1, 0);
     }
 }
