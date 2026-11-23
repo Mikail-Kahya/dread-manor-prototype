@@ -1,3 +1,4 @@
+using DM;
 using UnityEngine;
 
 public class ExamineAttacher : MonoBehaviour
@@ -5,7 +6,8 @@ public class ExamineAttacher : MonoBehaviour
     [SerializeField] private ExamineController ExamineController;
     [SerializeField] private Light FirstPersonLight;
     [SerializeField] private Light ExamineLight;
-    private GameObject _examineObject = null;
+    [SerializeField] private ExamineInfo ExamineInfo;
+    private IExaminable _examineObject = null;
     private Vector3 _originalPosition;
     private Quaternion _originalRotation;
 
@@ -62,5 +64,6 @@ public class ExamineAttacher : MonoBehaviour
     {
         FirstPersonLight.gameObject.SetActive(!useExamine);
         ExamineLight.gameObject.SetActive(useExamine);
+        ExamineInfo.gameObject.SetActive(useExamine);
     }
 }
