@@ -8,12 +8,12 @@ public class ExamineController : MonoBehaviour
     #region Events
     public event Action OnEnterEvent;
     public event Action OnExitEvent;
-    public event Action <GameObject> OnExamineEvent;
-    public event Action<GameObject> OnExamineEndEvent;
+    public event Action <IExaminable> OnExamineEvent;
+    public event Action<IExaminable> OnExamineEndEvent;
     #endregion
 
     private PlayerInput _inputActions;
-    private GameObject _examineObject;
+    private IExaminable _examineObject;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class ExamineController : MonoBehaviour
     private void OnEnable()
     {
         _inputActions.Examine.Enable();
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Confined;
         OnEnterEvent?.Invoke();
         if (_examineObject != null)
             OnExamineEvent?.Invoke(_examineObject);
@@ -54,9 +54,6 @@ public class ExamineController : MonoBehaviour
 
     public void AttachExamine(IExaminable examinable)
     {
-        if (examinable is MonoBehaviour examineObject)
-            _examineObject = examineObject.gameObject;
-        else
-            _examineObject = null;
+        _examineObject = examinable;
     }
 }

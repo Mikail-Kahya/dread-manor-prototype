@@ -26,7 +26,7 @@ public class FirstPersonInteracter : MonoBehaviour
     {
         IInteractable interactable;
         RaycastHit hitInfo;
-        MathHelpers.SphereCastInfo castInfo = new MathHelpers.SphereCastInfo
+        Helpers.SphereCastInfo castInfo = new Helpers.SphereCastInfo
         {
             position = transform.position,
             direction = transform.forward,
@@ -35,7 +35,7 @@ public class FirstPersonInteracter : MonoBehaviour
             layers = Settings.InteractLayerMask
         };
 
-        bool hitInteracble = MathHelpers.SphereCastForInterface(out interactable, out hitInfo, castInfo);
+        bool hitInteracble = Helpers.SphereCastForInterface(out interactable, out hitInfo, castInfo);
 
         if (hitInteracble)
         {

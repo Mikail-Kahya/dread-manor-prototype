@@ -21,7 +21,7 @@ public class ExamineAttacher : MonoBehaviour
         ExamineController.OnExamineEndEvent -= Detach;
     }
 
-    public void Attach(GameObject examineObject)
+    public void Attach(IExaminable examineObject)
     {
         if (_examineObject != null)
         {
@@ -29,14 +29,19 @@ public class ExamineAttacher : MonoBehaviour
             return;
         }
 
-        _originalPosition = examineObject.transform.position;
-        _originalRotation = examineObject.transform.rotation;
+        GameObject gameObject;
+        if (Helpers.GetGameObject(examineObject, out gameObject) == false)
+            return;
+
         _examineObject = examineObject;
-        _examineObject.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        ExamineInfo.ShowInfo(examineObject);
+        _originalPosition = gameObject.transform.position;
+        _originalRotation = gameObject.transform.rotation;
+        gameObject.transform.SetPositionAndRotation(transform.position, transform.rotation);
         UseExamineLight(true);
     }
 
-    public void Detach(GameObject examineObject)
+    public void Detach(IExaminable examineObject)
     {
         if (_examineObject != examineObject)
         {
@@ -44,8 +49,12 @@ public class ExamineAttacher : MonoBehaviour
             return;
         }
 
-        _examineObject.transform.SetPositionAndRotation(_originalPosition, _originalRotation);
+        GameObject gameObject;
+        if (Helpers.GetGameObject(examineObject, out gameObject) == false)
+            return;
+
         _examineObject = null;
+        gameObject.transform.SetPositionAndRotation(_originalPosition, _originalRotation);
         UseExamineLight(false);
     }
 

@@ -36,7 +36,7 @@ public class StaminaGuage : MonoBehaviour
         {
             case State.drain:
                 _stamina = Mathf.Max(_stamina - Time.deltaTime, 0f);
-                if (DM.MathHelpers.IsEqual(_stamina, 0f))
+                if (DM.Helpers.IsEqual(_stamina, 0f))
                 { 
                     _state = State.delay;
                     _regenDelay = 0f;
@@ -45,7 +45,7 @@ public class StaminaGuage : MonoBehaviour
                 break;
             case State.delay:
                 _regenDelay = Mathf.Min(_regenDelay + Time.deltaTime, StaminaRegenDelay);
-                if (DM.MathHelpers.IsEqual(_regenDelay, StaminaRegenDelay))
+                if (DM.Helpers.IsEqual(_regenDelay, StaminaRegenDelay))
                 {
                     _state = State.regen;
                     OnStaminaRecharging?.Invoke();
@@ -53,7 +53,7 @@ public class StaminaGuage : MonoBehaviour
                 break;
             case State.regen:
                 _stamina = Mathf.Min(_stamina + Time.deltaTime * StaminaRegenRate, MaxStam);
-                if (DM.MathHelpers.IsEqual(_stamina, MaxStam))
+                if (DM.Helpers.IsEqual(_stamina, MaxStam))
                 {
                     _state = _isDraining ? State.drain : State.idle;
                     OnStaminaRecharged?.Invoke();
@@ -64,7 +64,7 @@ public class StaminaGuage : MonoBehaviour
 
     public void SetStaminaSettings(float max, float regenDelay, float regenRate)
     {
-        if (Mathf.Abs(_stamina - MaxStam) < DM.MathHelpers.FLT_EPSILON)
+        if (Mathf.Abs(_stamina - MaxStam) < DM.Helpers.FLT_EPSILON)
             _stamina = max;
         MaxStamina = max;
         StaminaRegenDelay = regenDelay;

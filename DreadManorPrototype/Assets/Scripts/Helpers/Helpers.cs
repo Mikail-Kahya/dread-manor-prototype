@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DM
 {
-    public static class MathHelpers
+    public static class Helpers
     {
         public const float FLT_EPSILON = 0.0001f;
         public static bool IsNearlyZero(Vector3 vec, float epsilon = FLT_EPSILON)
@@ -49,6 +49,17 @@ namespace DM
                 }
             }
 
+            return false;
+        }
+
+        public static bool GetGameObject(IExaminable examinable, out GameObject gameObject)
+        {
+            if (examinable is MonoBehaviour examineObject)
+            {
+                gameObject = examineObject.gameObject;
+                return true;
+            }
+            gameObject = null;
             return false;
         }
     }

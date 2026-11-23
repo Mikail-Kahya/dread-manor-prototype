@@ -28,6 +28,11 @@ public class Letter : MonoBehaviour, IInteractable, IExaminable
         
     }
 
+    public string GetInfo()
+    {
+        return Text;
+    }
+
     private void OnValidate()
     {
         LetterText.text = Text;
