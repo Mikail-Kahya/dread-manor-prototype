@@ -10,6 +10,7 @@ public class ExamineController : MonoBehaviour
     public event Action OnExitEvent;
     public event Action <IExaminable> OnExamineEvent;
     public event Action<IExaminable> OnExamineEndEvent;
+    public event Action<float> OnScrollEvent;
     #endregion
 
     private PlayerInput _inputActions;
@@ -20,11 +21,13 @@ public class ExamineController : MonoBehaviour
         _inputActions = new PlayerInput();
 
         _inputActions.Examine.Exit.performed += OnExit;
+        _inputActions.Examine.Scroll.performed += OnScroll;
     }
 
     private void OnDestroy()
     {
         _inputActions.Examine.Exit.performed -= OnExit;
+        _inputActions.Examine.Scroll.performed -= OnScroll;
     }
 
     private void OnEnable()
@@ -46,14 +49,19 @@ public class ExamineController : MonoBehaviour
         else
             throw new Exception("ExamineController can't end examination on an empty object");
     }
+    public void AttachExamine(IExaminable examinable)
+    {
+        _examineObject = examinable;
+    }
 
     private void OnExit(InputAction.CallbackContext context)
     {
         OnExitEvent?.Invoke();
     }
 
-    public void AttachExamine(IExaminable examinable)
+    private void OnScroll(InputAction.CallbackContext context)
     {
-        _examineObject = examinable;
+        Vector2 input = context.ReadValue<Vector2>();
+        OnScrollEvent?.Invoke(input.y);
     }
 }

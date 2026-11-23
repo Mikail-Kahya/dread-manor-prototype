@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DM
 {
@@ -18,6 +19,11 @@ namespace DM
         public static bool IsEqual(float val1, float val2, float epsilon = FLT_EPSILON)
         {
             return Mathf.Abs(val1 - val2) < epsilon;
+        }
+
+        public static float InverseLerp(float current, float min, float max) // Returns alpha the lerp
+        {
+            return (current - min) / (max - min);
         }
 
         public struct SphereCastInfo

@@ -623,6 +623,16 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""initialStateCheck"": false,
                     ""priority"": 0
+                },
+                {
+                    ""name"": ""Scroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""ad76a009-ba35-41ce-a210-085d5b1b4a30"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true,
+                    ""priority"": 0
                 }
             ],
             ""bindings"": [
@@ -757,6 +767,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""210ad18e-8380-494f-bc8a-631da5daaea0"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9ac02d83-9d20-45d4-8169-df6be7446813"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -792,6 +824,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Examine = asset.FindActionMap("Examine", throwIfNotFound: true);
         m_Examine_Rotate = m_Examine.FindAction("Rotate", throwIfNotFound: true);
         m_Examine_Exit = m_Examine.FindAction("Exit", throwIfNotFound: true);
+        m_Examine_Scroll = m_Examine.FindAction("Scroll", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
@@ -1156,6 +1189,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IExamineActions> m_ExamineActionsCallbackInterfaces = new List<IExamineActions>();
     private readonly InputAction m_Examine_Rotate;
     private readonly InputAction m_Examine_Exit;
+    private readonly InputAction m_Examine_Scroll;
     /// <summary>
     /// Provides access to input actions defined in input action map "Examine".
     /// </summary>
@@ -1175,6 +1209,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Examine/Exit".
         /// </summary>
         public InputAction @Exit => m_Wrapper.m_Examine_Exit;
+        /// <summary>
+        /// Provides access to the underlying input action "Examine/Scroll".
+        /// </summary>
+        public InputAction @Scroll => m_Wrapper.m_Examine_Scroll;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1207,6 +1245,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Exit.started += instance.OnExit;
             @Exit.performed += instance.OnExit;
             @Exit.canceled += instance.OnExit;
+            @Scroll.started += instance.OnScroll;
+            @Scroll.performed += instance.OnScroll;
+            @Scroll.canceled += instance.OnScroll;
         }
 
         /// <summary>
@@ -1224,6 +1265,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Exit.started -= instance.OnExit;
             @Exit.performed -= instance.OnExit;
             @Exit.canceled -= instance.OnExit;
+            @Scroll.started -= instance.OnScroll;
+            @Scroll.performed -= instance.OnScroll;
+            @Scroll.canceled -= instance.OnScroll;
         }
 
         /// <summary>
@@ -1390,5 +1434,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnExit(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Scroll" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnScroll(InputAction.CallbackContext context);
     }
 }
