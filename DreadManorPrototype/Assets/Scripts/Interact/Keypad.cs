@@ -1,18 +1,21 @@
-﻿using Mono.Cecil.Cil;
-using NUnit.Framework;
-using System;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Keypad : MonoBehaviour, IInteractable
 {
     [SerializeField] private BoxCollider Collider;
-    [SerializeField] private TextMeshPro ResultText;
+    [SerializeField] private TextMeshPro Display;
     [SerializeField] private int[] Code;
+    [SerializeField] private UnityEvent OnCorrectCodeEvent;
+    [SerializeField, Min(0.01f)] private float CodeCheckTime = 1f;
 
     private const int NR_COLS = 3;
     private const int NR_ROWS = 4;
 
+    private Coroutine _displayRoutine;
     private int _currentResult; // Uses bitflags
     private int _codeIndex;
 
@@ -51,19 +54,19 @@ public class Keypad : MonoBehaviour, IInteractable
 
     private void OnValidate()
     {
-        ResultText.text = string.Empty;
+        Display.text = string.Empty;
         foreach(int key in Code)
             AddKeyText(key);
     }
 
     private void Start()
     {
-        ResultText.text = string.Empty;
+        Display.text = string.Empty;
     }
 
     private void AddKeyText(int key)
     {
-        ResultText.text += key;
+        Display.text += key;
     }
 
     private void Confirm()
@@ -73,13 +76,35 @@ public class Keypad : MonoBehaviour, IInteractable
             return;
 
         bool allCorrect = _currentResult == ((1 << codeLength) - 1);
+
+        _displayRoutine = StartCoroutine(DisplayResult(allCorrect));
+    }
+
+    private IEnumerator DisplayResult(bool correct)
+    {
+        Display.text = new string(correct ? 'v' : 'x', Code.Length); ;
+        Collider.enabled = false;
+       
+        yield return new WaitForSeconds(CodeCheckTime);
+
+        Display.text = "";
+        if (correct)
+        {
+            OnCorrectCodeEvent?.Invoke();
+        }
+        else
+        {
+            Collider.enabled = true;
+            Cancel();
+        }
+        _displayRoutine = null;
     }
 
     private void Cancel()
     {
         _codeIndex = 0;
         _currentResult = 0;
-        ResultText.text = string.Empty;
+        Display.text = string.Empty;
     }
 
     private void AddKey(int key)

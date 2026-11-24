@@ -578,7 +578,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.006, y: 0.357}
-  m_SizeDelta: {x: 0.2, y: 0.1}
+  m_SizeDelta: {x: 0.18, y: 0.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &7121096883367065389
 MeshRenderer:
@@ -649,7 +649,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1234
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -679,11 +679,11 @@ MonoBehaviour:
   m_fontSize: 0.7
   m_fontSizeBase: 0.7
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 0.5
+  m_fontSizeMax: 0.8
   m_fontStyle: 0
-  m_HorizontalAlignment: 16
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2252,8 +2252,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Keypad
   Collider: {fileID: 4057450648301834733}
-  ResultText: {fileID: 3872427641340206927}
+  Display: {fileID: 3872427641340206927}
   Code: 
+  OnCorrectCodeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  CodeCheckTime: 1
 --- !u!1 &5825009518487856022
 GameObject:
   m_ObjectHideFlags: 0
