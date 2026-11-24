@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class FirstPersonCamera : MonoBehaviour
 {
+    public Vector3 Forward => CameraTransform.forward;
+    public Vector3 Position => CameraTransform.position;
+
     [SerializeField] private PlayerSettings Settings;
     [SerializeField] private FirstPersonController Controller;
     [SerializeField] private Transform CameraTransform;

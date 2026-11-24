@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        ToggleCrouch(false);
         PlayerStamina.SetStaminaSettings(Settings.Stamina, Settings.StaminaRegenDelay, Settings.StaminaRegenRate);
         Controller.OnSprintChangedEvent += ToggleSprint;
         Controller.OnCrouchChangedEvent += ToggleCrouch;
