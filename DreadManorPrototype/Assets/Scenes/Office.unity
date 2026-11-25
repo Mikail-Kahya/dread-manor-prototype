@@ -12399,6 +12399,10 @@ PrefabInstance:
       propertyPath: GemSlottingLerp
       value: 
       objectReference: {fileID: 2053814004}
+    - target: {fileID: 3713139466424405800, guid: de3e432286a4cea418939562cbdcbaee, type: 3}
+      propertyPath: m_text
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4278425150886891166, guid: de3e432286a4cea418939562cbdcbaee, type: 3}
       propertyPath: m_Name
       value: EndDoor
