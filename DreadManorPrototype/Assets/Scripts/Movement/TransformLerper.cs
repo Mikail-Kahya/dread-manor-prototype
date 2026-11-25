@@ -28,7 +28,6 @@ public class TransformLerper : MonoBehaviour
 
     private float _currentAlpha = 0f;
     private Direction _direction;
-    private bool _finished = false;
 
     private void OnValidate()
     {

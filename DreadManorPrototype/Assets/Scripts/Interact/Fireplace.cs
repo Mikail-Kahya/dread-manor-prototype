@@ -1,5 +1,4 @@
-﻿using Unity.Android.Gradle.Manifest;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class Fireplace : MonoBehaviour, IInteractable
