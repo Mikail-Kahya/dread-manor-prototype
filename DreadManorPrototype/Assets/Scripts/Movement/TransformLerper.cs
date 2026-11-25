@@ -7,6 +7,11 @@ public class TransformLerper : MonoBehaviour
 {
     public enum Direction { Backward = -1, Forward = 1 }
 
+    #region Properties
+    public float AnimationDuration => Duration;
+    #endregion
+
+    #region Fields
     [Header("References")]
     [SerializeField] private Transform Target;
     [SerializeField] private Transform Begin;
@@ -19,6 +24,7 @@ public class TransformLerper : MonoBehaviour
     [SerializeField] private Direction StartDirection = Direction.Forward;
     [SerializeField] private bool CanReverse = true;
     [SerializeField] private bool CanLoop = true;
+    #endregion
 
     private float _currentAlpha = 0f;
     private Direction _direction;
