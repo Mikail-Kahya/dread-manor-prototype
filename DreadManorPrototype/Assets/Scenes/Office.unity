@@ -4137,6 +4137,8 @@ Transform:
   - {fileID: 979290893}
   - {fileID: 1706330025}
   - {fileID: 1318309810}
+  - {fileID: 783393337}
+  - {fileID: 1442501011}
   - {fileID: 2078459931}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4695,14 +4697,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783393336}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 15.077, y: 0, z: 3.97358}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1847532296}
   - {fileID: 1077159619}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 617348303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &783393338
 MonoBehaviour:
@@ -7176,6 +7178,11 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!4 &1442501011 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4651082393668833212, guid: 164ce2d1953604440ba53c69b10bd709, type: 3}
+  m_PrefabInstance: {fileID: 2026343110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1615362329
 Mesh:
   m_ObjectHideFlags: 0
@@ -10942,7 +10949,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 617348303}
     m_Modifications:
     - target: {fileID: 1207136054564462740, guid: 164ce2d1953604440ba53c69b10bd709, type: 3}
       propertyPath: m_Name
@@ -10995,7 +11002,7 @@ PrefabInstance:
     - target: {fileID: 5723326728957362522, guid: 164ce2d1953604440ba53c69b10bd709, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+      objectReference: {fileID: 2100000, guid: 72057ca4eabf55d45813cf3824782f01, type: 2}
     - target: {fileID: 8304082225177689402, guid: 164ce2d1953604440ba53c69b10bd709, type: 3}
       propertyPath: Text
       value: "Slowly my mind is fading. Soon enough I won\u2019t even be able to recognize my own name. If you read this, your name is Hendricks. Every day of research results in more of my memories fading, I can barely remember the voice of my wife.\n\r\nThe research is going well, but I can\u2019t seem to remember the code anymore. I have scrawled the numbers in places so I won\u2019t forget. There is one behind the portrait of my wife, one on the back of this letter, the next one is only visible once the fire is burning, and the last one can be found on the forehead of the skull of the door."
@@ -11332,5 +11339,3 @@ SceneRoots:
   m_Roots:
   - {fileID: 617348303}
   - {fileID: 190476910}
-  - {fileID: 783393337}
-  - {fileID: 2026343110}
