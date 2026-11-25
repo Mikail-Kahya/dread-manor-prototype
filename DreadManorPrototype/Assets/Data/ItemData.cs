@@ -3,7 +3,7 @@ using System;
 public enum ItemId
 {
     FireWood = 1,
-    SkullGem = 2
+    HavaliGem = 2
 }
 
 [Serializable]
