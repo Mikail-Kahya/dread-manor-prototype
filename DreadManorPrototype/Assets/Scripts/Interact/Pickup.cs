@@ -7,12 +7,11 @@ public class Pickup : MonoBehaviour, IInteractable, IExaminable
     [SerializeField] private ItemData Data;
     [SerializeField, TextArea] private string ExamineInfo;
 
-    ExamineController _controller;
+    Inventory _inventory;
 
     public void Interact(GameObject interacter)
     {
-        _controller = interacter.GetComponent<ExamineController>();
-        _controller.OnNextEvent += Release;
+        _inventory = interacter.GetComponent<Inventory>();
     }
 
     public void Highlight(GameObject interacter) { }
@@ -26,12 +25,7 @@ public class Pickup : MonoBehaviour, IInteractable, IExaminable
 
     public void Release()
     {
-        _controller.OnNextEvent -= Release;
-
-        if (_controller.TryGetComponent(out Inventory inventory))
-        {
-            inventory.AddItem(Data);
-        }
+        _inventory?.AddItem(Data);
         Destroy(gameObject);
     }
 
