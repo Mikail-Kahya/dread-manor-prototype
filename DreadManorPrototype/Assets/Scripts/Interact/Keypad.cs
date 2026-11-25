@@ -97,6 +97,8 @@ public class Keypad : MonoBehaviour, IInteractable
             Collider.enabled = true;
             Cancel();
         }
+
+        StopCoroutine(_displayRoutine);
         _displayRoutine = null;
     }
 
