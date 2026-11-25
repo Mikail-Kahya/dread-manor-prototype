@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class FirstPersonController : MonoBehaviour
@@ -17,44 +16,33 @@ public class FirstPersonController : MonoBehaviour
     public event Action OnInteractEvent;
     #endregion
 
-    private PlayerInput _inputActions;
 
-
-    private void Awake()
+    public void Subscribe(PlayerInputBinds inputBinds)
     {
-        _inputActions = new PlayerInput();
-
-        _inputActions.Player.Move.performed += OnMove;
-        _inputActions.Player.Move.canceled += OnMove;
-        _inputActions.Player.Look.performed += OnLook;
-        _inputActions.Player.Sprint.performed += OnSprint;
-        _inputActions.Player.Sprint.canceled += OnSprint;
-        _inputActions.Player.Crouch.performed += OnCrouch;
-        _inputActions.Player.Crouch.canceled += OnCrouch;
-        _inputActions.Player.Interact.performed += OnInteract;
+        inputBinds.Player.Move.performed += OnMove;
+        inputBinds.Player.Move.canceled += OnMove;
+        inputBinds.Player.Look.performed += OnLook;
+        inputBinds.Player.Sprint.performed += OnSprint;
+        inputBinds.Player.Sprint.canceled += OnSprint;
+        inputBinds.Player.Crouch.performed += OnCrouch;
+        inputBinds.Player.Crouch.canceled += OnCrouch;
+        inputBinds.Player.Interact.performed += OnInteract;
     }
 
-    private void OnDestroy()
+    public void Unsubscribe(PlayerInputBinds inputBinds)
     {
-        _inputActions.Player.Move.performed -= OnMove;
-        _inputActions.Player.Move.canceled -= OnMove;
-        _inputActions.Player.Look.performed -= OnLook;
-        _inputActions.Player.Sprint.performed -= OnSprint;
-        _inputActions.Player.Sprint.canceled -= OnSprint;
-        _inputActions.Player.Crouch.performed -= OnCrouch;
-        _inputActions.Player.Crouch.canceled -= OnCrouch;
-        _inputActions.Player.Interact.performed -= OnInteract;
-    }
-
-    private void OnEnable()
-    {
-        _inputActions.Player.Enable();
-        Cursor.lockState = CursorLockMode.Locked;
+        inputBinds.Player.Move.performed -= OnMove;
+        inputBinds.Player.Move.canceled -= OnMove;
+        inputBinds.Player.Look.performed -= OnLook;
+        inputBinds.Player.Sprint.performed -= OnSprint;
+        inputBinds.Player.Sprint.canceled -= OnSprint;
+        inputBinds.Player.Crouch.performed -= OnCrouch;
+        inputBinds.Player.Crouch.canceled -= OnCrouch;
+        inputBinds.Player.Interact.performed -= OnInteract;
     }
 
     private void OnDisable()
     {
-        _inputActions.Player.Disable();
         LookInput = Vector3.zero;
         MoveInput = Vector3.zero;
     }

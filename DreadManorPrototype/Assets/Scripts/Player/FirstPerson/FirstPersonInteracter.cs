@@ -59,7 +59,7 @@ public class FirstPersonInteracter : MonoBehaviour
             if (HoveredInterable is IExaminable examinable)
             {
                 ControllerSwapper.ExamineController.AttachExamine(examinable);
-                ControllerSwapper.Swap(ControllerSwapper.Controller.examine);
+                ControllerSwapper.Swap(ControllerSwapper.Mapping.examine);
                 examinable.Examine();
             }
         }

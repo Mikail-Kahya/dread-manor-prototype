@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class ExamineController : MonoBehaviour
@@ -17,44 +16,43 @@ public class ExamineController : MonoBehaviour
     public event Action OnPrevEvent;
     #endregion
 
-    private PlayerInput _inputActions;
     private IExaminable _examineObject;
 
-    private void Awake()
+    public void Subscribe(PlayerInputBinds inputBinds)
     {
-        _inputActions = new PlayerInput();
-
-        _inputActions.Examine.Exit.performed += OnExit;
-        _inputActions.Examine.Scroll.performed += OnScroll;
-        _inputActions.Examine.Next.performed += OnNext;
-        _inputActions.Examine.Previous.performed += OnPrev;
-        _inputActions.Examine.Rotate.performed += OnRotate;
+        inputBinds.Examine.Exit.performed += OnExit;
+        inputBinds.Examine.Scroll.performed += OnScroll;
+        inputBinds.Examine.Next.performed += OnNext;
+        inputBinds.Examine.Previous.performed += OnPrev;
+        inputBinds.Examine.Rotate.performed += OnRotate;
     }
 
-    private void OnDestroy()
+    public void Unsubscribe(PlayerInputBinds inputBinds)
     {
-        _inputActions.Examine.Exit.performed -= OnExit;
-        _inputActions.Examine.Scroll.performed -= OnScroll;
-        _inputActions.Examine.Next.performed -= OnNext;
-        _inputActions.Examine.Previous.performed -= OnPrev;
-        _inputActions.Examine.Rotate.performed -= OnRotate;
+        inputBinds.Examine.Exit.performed -= OnExit;
+        inputBinds.Examine.Scroll.performed -= OnScroll;
+        inputBinds.Examine.Next.performed -= OnNext;
+        inputBinds.Examine.Previous.performed -= OnPrev;
+        inputBinds.Examine.Rotate.performed -= OnRotate;
     }
 
     private void OnEnable()
     {
-        _inputActions.Examine.Enable();
-        Cursor.lockState = CursorLockMode.Locked;
         OnEnterEvent?.Invoke();
         if (_examineObject != null)
+        {
             OnExamineEvent?.Invoke(_examineObject);
+        }
         else
-            throw new Exception("ExamineController can't examine an empty object");
+        {
+            Debug.LogError("ExamineController can't examine an empty object");
+        }
     }
 
     private void OnDisable()
     {
         RotateInput = Vector2.zero;
-        _inputActions.Examine.Disable();
+
         if (_examineObject != null)
         {
             _examineObject.Release();
@@ -62,7 +60,9 @@ public class ExamineController : MonoBehaviour
             _examineObject = null;
         }
         else
-            throw new Exception("ExamineController can't end examination on an empty object");
+        {
+            Debug.LogError("ExamineController can't end examination on an empty object");
+        }
     }
 
     public void AttachExamine(IExaminable examinable)
