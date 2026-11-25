@@ -24,8 +24,6 @@ public class FirstPersonInteracter : MonoBehaviour
 
     void Update()
     {
-        IInteractable interactable;
-        RaycastHit hitInfo;
         Helpers.SphereCastInfo castInfo = new Helpers.SphereCastInfo
         {
             position = transform.position,
@@ -35,7 +33,7 @@ public class FirstPersonInteracter : MonoBehaviour
             layers = Settings.InteractLayerMask
         };
 
-        bool hitInteracble = Helpers.SphereCastForInterface(out interactable, out hitInfo, castInfo);
+        bool hitInteracble = Helpers.SphereCastForInterface(out IInteractable interactable, out RaycastHit hitInfo, castInfo);
 
         if (hitInteracble)
         {

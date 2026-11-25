@@ -34,4 +34,4 @@ MonoBehaviour:
   InteractSphereRadius: 0.1
   InteractLayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 65

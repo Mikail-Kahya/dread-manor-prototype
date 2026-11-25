@@ -36,23 +36,20 @@ namespace DM
         public static bool SphereCastForInterface<T>(out T foundInterface, out RaycastHit validHit, SphereCastInfo castInfo) where T : class
         {
             foundInterface = null;
-            validHit = default;
+            
 
-            RaycastHit[] hits = Physics.SphereCastAll(castInfo.position, castInfo.radius, castInfo.direction, castInfo.range, castInfo.layers);
+            bool hitObject = Physics.SphereCast(castInfo.position, castInfo.radius, castInfo.direction, out validHit, castInfo.range, castInfo.layers);
 
-            System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
-               
-            foreach (RaycastHit hit in hits)
+            if (hitObject)
             {
-                T target = hit.collider.GetComponentInParent<T>();
+                T target = validHit.collider.GetComponentInParent<T>();
                 if (target != null)
                 {
                     foundInterface = target;
-                    validHit = hit;
                     return true;
                 }
             }
-
+            validHit = default;
             return false;
         }
 
