@@ -46,28 +46,27 @@ public class TransformLerper : MonoBehaviour
 
     private void Update()
     {
-        if (_finished) return;
-
         int direction = (int)_direction;
         _currentAlpha = Mathf.Clamp01(_currentAlpha + direction * Time.deltaTime / Duration);
         SetTransform(_currentAlpha);
 
         if (IsFinished(_direction))
         {
-            if (CanLoop == false)
-            {
-                _finished = true;
-                return;
-            }
-
             if (CanReverse)
                 _direction = (Direction)(-direction);
             else
                 _currentAlpha = _direction == Direction.Forward ? 0f : 1f;
+
+            if (CanLoop == false)
+            {
+                enabled = false;
+                return;
+            }
         }
     }
 
     public void SetDirection(Direction direction) => _direction = direction;
+    public void SetAlpha(float alpha) => _currentAlpha = Mathf.Clamp01(alpha);
 
     private bool IsFinished(Direction direction)
     {

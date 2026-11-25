@@ -1,38 +1,37 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Interact
+[RequireComponent(typeof(TransformLerper))]
+public class Door : MonoBehaviour, IInteractable
 {
-    public class Door : MonoBehaviour, IInteractable
+    [SerializeField] private bool CanClose = true;
+    
+    private TransformLerper _lerper;
+    private bool _isOpen = false;
+
+    void Start()
     {
-        [SerializeField, Tooltip("degrees")] private float OpenAngle = 90f;
+        _lerper = GetComponent<TransformLerper>();
+    }
 
-        [SerializeField] private bool IsOpen = false;
-        [SerializeField] private bool CanClose = true;
+    public void Interact(GameObject interacter)
+    {
+        if (_isOpen && CanClose == false)
+            return;
 
-        public void Interact(GameObject interacter)
+        if (_lerper.enabled == false)
         {
-            IsOpen = CanClose ? !IsOpen : true;
-            SetDoorState(IsOpen);
+            _isOpen = !_isOpen;
+            _lerper.enabled = true;
         }
+    }
 
-        public void Highlight(GameObject interacter)
-        {
-            Debug.Log("Highlight: " + gameObject.name);
-        }
+    public void Highlight(GameObject interacter)
+    {
+        Debug.Log("Highlight: " + gameObject.name);
+    }
 
-        public void UnHighlight(GameObject interacter)
-        {
-            Debug.Log("UnHighlight: " + gameObject.name);
-        }
-
-        private void OnValidate()
-        {
-            SetDoorState(IsOpen);
-        }
-
-        private void SetDoorState(bool isOpen)
-        {
-            transform.rotation = Quaternion.Euler(0f, isOpen ? OpenAngle : 0f, 0f);
-        }
+    public void UnHighlight(GameObject interacter)
+    {
+        Debug.Log("UnHighlight: " + gameObject.name);
     }
 }
