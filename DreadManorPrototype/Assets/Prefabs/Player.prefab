@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3730615820793124667}
   - component: {fileID: 5125364262194381524}
   - component: {fileID: 3139121122354085578}
+  - component: {fileID: 2581078863822218800}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -172,6 +173,18 @@ MonoBehaviour:
   MaxStamina: 4
   StaminaRegenDelay: 1
   StaminaRegenRate: 1
+--- !u!114 &2581078863822218800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525953548101018116}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a449a558c55f549ad6a13874594464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inventory
 --- !u!1 &3822273248136407095
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,7 +466,7 @@ Transform:
   m_GameObject: {fileID: 5291585005548853670}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
