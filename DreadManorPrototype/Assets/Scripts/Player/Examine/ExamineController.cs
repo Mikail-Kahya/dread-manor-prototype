@@ -43,7 +43,7 @@ public class ExamineController : MonoBehaviour
     private void OnEnable()
     {
         _inputActions.Examine.Enable();
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
         OnEnterEvent?.Invoke();
         if (_examineObject != null)
             OnExamineEvent?.Invoke(_examineObject);

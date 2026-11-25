@@ -488,6 +488,7 @@ MonoBehaviour:
   FirstPersonLight: {fileID: 6047126570325890523}
   ExamineLight: {fileID: 1693262046667000212}
   ExamineInfo: {fileID: 8393376212679484308}
+  RotateSpeed: 120
 --- !u!1 &7001826429661677961
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,7 +760,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: FirstPersonInfo
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5430108598048267280, guid: de6b3ec48e6ae544aa830c5722b75c69, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
