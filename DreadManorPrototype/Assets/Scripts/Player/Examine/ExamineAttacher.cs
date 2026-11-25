@@ -7,7 +7,9 @@ public class ExamineAttacher : MonoBehaviour
     [SerializeField] private Light FirstPersonLight;
     [SerializeField] private Light ExamineLight;
     [SerializeField] private ExamineInfo ExamineInfo;
+    [SerializeField] private float RotateSpeed = 120f;
     private IExaminable _examineObject = null;
+    private Transform _examineTransform;
     private Vector3 _originalPosition;
     private Quaternion _originalRotation;
 
@@ -15,12 +17,19 @@ public class ExamineAttacher : MonoBehaviour
     {
         ExamineController.OnExamineEvent += Attach;
         ExamineController.OnExamineEndEvent += Detach;
+        enabled = false;
     }
 
     private void OnDestroy()
     {
         ExamineController.OnExamineEvent -= Attach;
         ExamineController.OnExamineEndEvent -= Detach;
+    }
+
+    private void Update()
+    {
+        Vector2 rotation = Time.deltaTime * RotateSpeed * ExamineController.RotateInput;
+        _examineTransform.localRotation *= Quaternion.Euler(rotation.y, rotation.x, 0f);
     }
 
     public void Attach(IExaminable examineObject)
@@ -31,16 +40,17 @@ public class ExamineAttacher : MonoBehaviour
             return;
         }
 
-        GameObject gameObject;
-        if (Helpers.GetGameObject(examineObject, out gameObject) == false)
-            return;
-
-        _examineObject = examineObject;
-        ExamineInfo.ShowInfo(examineObject);
-        _originalPosition = gameObject.transform.position;
-        _originalRotation = gameObject.transform.rotation;
-        gameObject.transform.SetPositionAndRotation(transform.position, transform.rotation);
-        UseExamineLight(true);
+        if (Helpers.GetGameObject(examineObject, out GameObject gameObject))
+        {
+            _examineObject = examineObject;
+            _examineTransform = gameObject.transform;
+            ExamineInfo.ShowInfo(examineObject);
+            _originalPosition = gameObject.transform.position;
+            _originalRotation = gameObject.transform.rotation;
+            gameObject.transform.SetPositionAndRotation(transform.position, transform.rotation);
+            UseExamineLight(true);
+            enabled = true;
+        }
     }
 
     public void Detach(IExaminable examineObject)
@@ -51,13 +61,15 @@ public class ExamineAttacher : MonoBehaviour
             return;
         }
 
-        GameObject gameObject;
-        if (Helpers.GetGameObject(examineObject, out gameObject) == false)
-            return;
-
-        _examineObject = null;
-        gameObject.transform.SetPositionAndRotation(_originalPosition, _originalRotation);
-        UseExamineLight(false);
+        if (Helpers.GetGameObject(examineObject, out GameObject gameObject))
+        {
+            _examineTransform.localRotation = new Quaternion();
+            _examineObject = null;
+            _examineTransform = null;
+            gameObject.transform.SetPositionAndRotation(_originalPosition, _originalRotation);
+            UseExamineLight(false);
+            enabled = false;
+        }
     }
 
     private void UseExamineLight(bool useExamine)

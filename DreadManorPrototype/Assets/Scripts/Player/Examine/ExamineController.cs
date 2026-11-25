@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class ExamineController : MonoBehaviour
 {
+    public Vector2 RotateInput { get; private set; }
+
     #region Events
     public event Action OnEnterEvent;
     public event Action OnExitEvent;
@@ -26,6 +28,7 @@ public class ExamineController : MonoBehaviour
         _inputActions.Examine.Scroll.performed += OnScroll;
         _inputActions.Examine.Next.performed += OnNext;
         _inputActions.Examine.Previous.performed += OnPrev;
+        _inputActions.Examine.Rotate.performed += OnRotate;
     }
 
     private void OnDestroy()
@@ -34,6 +37,7 @@ public class ExamineController : MonoBehaviour
         _inputActions.Examine.Scroll.performed -= OnScroll;
         _inputActions.Examine.Next.performed -= OnNext;
         _inputActions.Examine.Previous.performed -= OnPrev;
+        _inputActions.Examine.Rotate.performed -= OnRotate;
     }
 
     private void OnEnable()
@@ -49,6 +53,7 @@ public class ExamineController : MonoBehaviour
 
     private void OnDisable()
     {
+        RotateInput = Vector2.zero;
         _inputActions.Examine.Disable();
         if (_examineObject != null)
         {
@@ -59,6 +64,7 @@ public class ExamineController : MonoBehaviour
         else
             throw new Exception("ExamineController can't end examination on an empty object");
     }
+
     public void AttachExamine(IExaminable examinable)
     {
         _examineObject = examinable;
@@ -83,5 +89,10 @@ public class ExamineController : MonoBehaviour
     private void OnPrev(InputAction.CallbackContext context)
     {
         OnPrevEvent?.Invoke();
+    }
+
+    private void OnRotate(InputAction.CallbackContext context)
+    {
+        RotateInput = context.ReadValue<Vector2>();
     }
 }

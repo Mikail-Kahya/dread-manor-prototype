@@ -701,7 +701,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""down"",
+                    ""name"": ""Left"",
                     ""id"": ""9edc8343-4a10-4417-b598-0678a6733512"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
@@ -712,7 +712,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""left"",
+                    ""name"": ""Down"",
                     ""id"": ""a9874149-a8f8-4e1c-b7c9-0532e6ac1615"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
